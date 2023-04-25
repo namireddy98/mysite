@@ -1,4 +1,4 @@
-# mysite
+# mysite projectk
 download the project from the Github URL or clone it using the following command
 
 git clone "Project URL"
