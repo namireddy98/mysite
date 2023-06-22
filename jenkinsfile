@@ -1,25 +1,45 @@
 pipeline {
     agent any
-    
+
     stages {
         stage('Build') {
             steps {
-                // Perform the build steps here
-                sh 'your-build-command'
+                echo 'Building'
             }
         }
-        
         stage('Test') {
             steps {
-                // Perform the test steps here
-                sh 'your-test-command'
+                echo 'Testing'
             }
         }
-        
-        stage('Deploy') {
+        stage('Sonar scanning') {
             steps {
-                // Perform the deployment steps here
-                sh 'your-deploy-command'
+                echo 'Scanning the quality of code'
+            }
+        }
+        stage('Publish to Artifactory') {
+            steps {
+                echo 'Publishing to Artifactory'
+            }
+        }
+        stage('Deploy to Dev') {
+            steps {
+                echo 'Deploying to Dev'
+            }
+        }
+        stage('Deploy to UAT') {
+        steps {
+                echo 'Deploying to UAT'
+            }
+        }
+        stage('Deploy to Staging') {
+            steps {
+                echo 'Deploying to Satge'
+            }
+        }
+        stage('Deploy to Artifactory') {
+            steps {
+                echo 'Deploying to Artifactory'
             }
         }
     }
