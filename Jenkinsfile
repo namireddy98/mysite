@@ -1,45 +1,16 @@
-pipeline {
+pipeline{
     agent any
 
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Building'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing'
-            }
-        }
-        stage('Sonar scanning') {
-            steps {
-                echo 'Scanning the quality of code'
-            }
-        }
-        stage('Publish to Artifactory') {
-            steps {
-                echo 'Publishing to Artifactory'
-            }
-        }
-        stage('Deploy to Dev') {
-            steps {
-                echo 'Deploying to Dev'
-            }
-        }
-        stage('Deploy to UAT') {
-        steps {
-                echo 'Deploying to UAT'
-            }
-        }
-        stage('Deploy to Staging') {
-            steps {
-                echo 'Deploying to Satge'
-            }
-        }
-        stage('Deploy to Artifactory') {
-            steps {
-                echo 'Deploying to Artifactory'
+    stages{
+        stage("Aws test credentials"){
+            steps{
+                withAWS(credentials: 'your-id-name', region: 'your-region'){
+                    sh 'echo "Hello DevOps" > hello.txt'
+                    s3Upload (acl: 'Private' , bucket: 'your-bucket-name' , file: 'hello.txt')
+                    s3Download(file:'downloaded.txt', bucket:'your-bucket-name', path:'hello.txt',force:true) 
+                    sh "cat downloaded.txt"
+
+                }
             }
         }
     }
